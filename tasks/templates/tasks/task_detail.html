@@ -1,0 +1,12 @@
+{% extends 'tasks/base.html' %}
+
+{% block content %}
+<h2>{{ task.title }}</h2>
+<p>{{ task.description }}</p>
+<p>Status: {{ task.completed|yesno:"Completed,Pending" }}</p>
+<a href="{% url 'task_update' task.pk %}" class="btn">Edit</a>
+<form method="POST" action="{% url 'task_delete' task.pk %}">
+    {% csrf_token %}
+    <button type="submit" class="btn">Delete</button>
+</form>
+{% endblock %}
